@@ -1,11 +1,12 @@
-import org.apache.flink.api.common.functions.FilterFunction
+package it.coe.flink
+
 import org.apache.flink.api.common.serialization.SimpleStringSchema
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment
 import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer
 
 import java.util.Properties
 
-object Example {
+object FlinkMain {
   @throws[Exception]
   def main(args: Array[String]): Unit = {
     val env = StreamExecutionEnvironment.getExecutionEnvironment
@@ -15,7 +16,7 @@ object Example {
     properties.setProperty("group.id", "test")
     val stream = env.addSource(
       new FlinkKafkaConsumer[String]("test", new SimpleStringSchema(), properties)
-      .setStartFromEarliest()
+        .setStartFromEarliest()
     )
 
     stream.print
