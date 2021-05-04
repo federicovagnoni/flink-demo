@@ -22,15 +22,15 @@ under the License.
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>it.coe.flink-demo</groupId>
-	<artifactId>examples-scala_2.12</artifactId>
+	<artifactId>example</artifactId>
 	<version>1.0</version>
 	<packaging>jar</packaging>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<flink.version>1.13.0</flink.version>
-		<scala.binary.version>2.12</scala.binary.version>
-		<scala.version>2.12.8</scala.version>
+		<flink.version>1.12.3</flink.version>
+		<scala.binary.version>2.11</scala.binary.version>
+		<scala.version>2.11.12</scala.version>
 	</properties>
 
 	<dependencies>
@@ -49,6 +49,12 @@ under the License.
 			<scope>provided</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>org.apache.flink</groupId>
+			<artifactId>flink-connector-kafka_${scala.binary.version}</artifactId>
+			<version>${flink.version}</version>
+		</dependency>
+
 		<!-- Scala Library, provided by Flink as well. -->
 		<dependency>
 			<groupId>org.scala-lang</groupId>
@@ -65,21 +71,9 @@ under the License.
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- queryable-state dependencies are needed for respective examples -->
-<!--		<dependency>-->
-<!--			<groupId>org.apache.flink</groupId>-->
-<!--			<artifactId>flink-queryable-state-runtime_${scala.binary.version}</artifactId>-->
-<!--			<version>${flink.version}</version>-->
-<!--		</dependency>-->
-<!--		<dependency>-->
-<!--			<groupId>org.apache.flink</groupId>-->
-<!--			<artifactId>flink-queryable-state-client-java_${scala.binary.version}</artifactId>-->
-<!--			<version>${flink.version}</version>-->
-<!--		</dependency>-->
+
 
 		<!--
-		Derby is used for a sink connector example.
-		Example only works in local mode, i.e, it is not possible to submit it to a running cluster.
 		The dependency is set to provided to reduce the size of the JAR file.
 		-->
 		<dependency>
