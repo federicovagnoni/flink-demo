@@ -1,8 +1,13 @@
 package it.coe.kafka
 
+import com.google.gson.Gson
+import it.coe.model.VaccineSomministration
 import org.apache.kafka.clients.producer.{KafkaProducer, ProducerRecord}
 
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.Properties
+import scala.util.Random
 
 object Producer {
 
@@ -16,8 +21,10 @@ object Producer {
     props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer")
     props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer")
     val producer = new KafkaProducer[String, String](props)
+    //TODO add readCSv
     for(i <- 1 to 100) {
-      val record = new ProducerRecord[String, String](topic, "key", s"value $i")
+      val gson = new Gson
+      val record = new ProducerRecord[String, String](topic, "key", gson.toJson(VaccineSomministration))
       producer.send(record)
     }
     producer.close()
