@@ -1,9 +1,7 @@
 package it.coe.model
 
-import java.time.LocalDate
-
 case class VaccineSomministration(
-                                   data_somministrazione: LocalDate,
+                                   data_somministrazione: String,
                                    fornitore: String,
                                    area: String,
                                    fascia_anagrafica: String,

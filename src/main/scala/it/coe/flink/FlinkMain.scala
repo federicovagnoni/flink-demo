@@ -20,7 +20,7 @@ object FlinkMain {
     val properties = FlinkKafkaProperties.getProperties
     val stream = env.addSource(
       new FlinkKafkaConsumer[String](VACCINE_SOMMINISTRATION_TOPIC, new SimpleStringSchema(), properties)
-        .setStartFromEarliest()
+        .setStartFromLatest()
     )
 
 

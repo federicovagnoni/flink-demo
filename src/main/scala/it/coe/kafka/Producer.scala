@@ -17,8 +17,8 @@ object Producer {
     val producer = new KafkaProducer[String, String](props)
     val objects = MapRowCsvToModel.readCSV()
     objects.foreach(x => {
-      Thread.sleep(500)
-      val gson = new Gson
+//      Thread.sleep(1000)
+      val gson = new Gson()
       val record = new ProducerRecord[String, String](topic, "key", gson.toJson(x))
       println(gson.toJson(x))
       producer.send(record)
@@ -27,3 +27,4 @@ object Producer {
     producer.close()
   }
 }
+

@@ -1,13 +1,12 @@
 package it.coe.model
 
-import java.time.LocalDate
 import scala.io.Source
 
 object MapRowCsvToModel {
   def rowToObject(row: String): VaccineSomministration = {
     val x = row.split(",", -1)
     VaccineSomministration(
-      LocalDate.parse(x(0)),
+      x(0),
       x(1),
       x(2),
       x(3),
