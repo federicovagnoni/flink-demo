@@ -1,5 +1,6 @@
 package it.coe.flink
 
+import it.coe.common.Utils.{VACCINE_SOMMINISTRATION_GROUP, VACCINE_SOMMINISTRATION_TOPIC}
 import org.apache.flink.api.common.serialization.SimpleStringSchema
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment
 import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer
@@ -11,11 +12,9 @@ object FlinkMain {
   def main(args: Array[String]): Unit = {
     val env = StreamExecutionEnvironment.getExecutionEnvironment
 
-    val properties = new Properties()
-    properties.setProperty("bootstrap.servers", "localhost:9092")
-    properties.setProperty("group.id", "test")
+    val properties = FlinkKafkaProperties.getProperties
     val stream = env.addSource(
-      new FlinkKafkaConsumer[String]("test", new SimpleStringSchema(), properties)
+      new FlinkKafkaConsumer[String](VACCINE_SOMMINISTRATION_TOPIC, new SimpleStringSchema(), properties)
         .setStartFromEarliest()
     )
 
